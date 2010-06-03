@@ -17,7 +17,7 @@ $modversion['displayname']      = __('Tour', $dom);
 //!module name that appears in URL
 $modversion['url']              = __('tour', $dom);
 $modversion['description']      = __('First time configuration and Zikula Tour.', $dom);
-$modversion['version']          = '1.2';
+$modversion['version']          = '1.3';
 $modversion['credits']          = 'pndocs/credits.txt';
 $modversion['help']             = 'pndocs/install.txt';
 $modversion['changelog']        = 'pndocs/changelog.txt';
