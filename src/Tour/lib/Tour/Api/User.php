@@ -24,7 +24,7 @@ class Tour_Api_User extends AbstractApi
         $ext = FormUtil::getPassedValue('ext', isset($args['ext']) ? $args['ext'] : null, 'GET');
         // Generate links for module tutorial pages.
         if (!empty($ext)) {
-            return pnModAPIFunc('Tour', 'user', 'getextlinks');
+            return ModUtil::apiFunc('Tour', 'user', 'getextlinks');
         }
 
         $page = FormUtil::getPassedValue('page', isset($args['page']) ? $args['page'] : null, 'GET');
@@ -34,10 +34,10 @@ class Tour_Api_User extends AbstractApi
             case 'firsttimemodules':
             case 'firsttimeblocks':
             case 'firsttimethemes':
-                $links[] = array('url' => pnModURL('Tour', 'user', 'display', array ('page' => 'firsttime')), 'text' => $this->__('Start'));
-                $links[] = array('url' => pnModURL('Tour', 'user', 'display', array ('page' => 'firsttimethemes')), 'text' => $this->__('Themes'));
-                $links[] = array('url' => pnModURL('Tour', 'user', 'display', array ('page' => 'firsttimemodules')), 'text' => $this->__('Modules'));
-                $links[] = array('url' => pnModURL('Tour', 'user', 'display', array ('page' => 'firsttimeblocks')), 'text' => $this->__('Blocks'));
+                $links[] = array('url' => ModUtil::url('Tour', 'user', 'display', array ('page' => 'firsttime')), 'text' => $this->__('Start'));
+                $links[] = array('url' => ModUtil::url('Tour', 'user', 'display', array ('page' => 'firsttimethemes')), 'text' => $this->__('Themes'));
+                $links[] = array('url' => ModUtil::url('Tour', 'user', 'display', array ('page' => 'firsttimemodules')), 'text' => $this->__('Modules'));
+                $links[] = array('url' => ModUtil::url('Tour', 'user', 'display', array ('page' => 'firsttimeblocks')), 'text' => $this->__('Blocks'));
                 break;
         }
         return $links;
@@ -59,19 +59,19 @@ class Tour_Api_User extends AbstractApi
                 $directory = 'docs/distribution';
                 break;
             case 'module':
-                $id = pnModGetIDFromName($ext);
+                $id = ModUtil::getIdFromName($ext);
                 if (!$id) {
                     LogUtil::registerError($this->__f('Unknown module %s in Tour_userapi_getsublinks.', $ext));
-                    pnRedirect(pnModURL('Tour', 'user', 'main'));
+                    System::redirect(ModUtil::url('Tour', 'user', 'main'));
                 }
-                $info = pnModGetInfo($id);
+                $info = ModUtil::getInfo($id);
                 $directory = 'modules/'.$info['directory'].'/pndocs/';
                 break;
             case 'theme':
                 $id = pnThemeGetIDFromName($ext);
                 if (!$id) {
                     LogUtil::registerError($this->__f('Unknown theme %s in Tour_userapi_getsublinks.', $ext));
-                    pnRedirect(pnModURL('Tour', 'user', 'main'));
+                    System::redirect(ModUtil::url('Tour', 'user', 'main'));
                 }
                 $info = pnThemeGetInfo($id);
                 $directory = $info['directory'].'/pndocs/';
@@ -91,7 +91,7 @@ class Tour_Api_User extends AbstractApi
         $links = array();
         foreach ($files as $file) {
             $pageno = str_replace(array('tour_page', '.htm', '.html'), '', $file);
-            $links[] = array('url' => pnModURL('Tour', 'user', 'exttour', array ('page' => $pageno, 'ext' => $ext, 'exttype' => $exttype)), 'text' => $this->__f('Page %s', $pageno));
+            $links[] = array('url' => ModUtil::url('Tour', 'user', 'exttour', array ('page' => $pageno, 'ext' => $ext, 'exttype' => $exttype)), 'text' => $this->__f('Page %s', $pageno));
         }
         return $links;
     }

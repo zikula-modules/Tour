@@ -30,7 +30,7 @@ class Tour_User extends AbstractController
         $page = FormUtil::getPassedValue('page', 'home', 'GET');
 
         if ($page == 'extensions') {
-            $content = pnModFunc('Tour', 'user', 'extensions');
+            $content = ModUtil::func('Tour', 'user', 'extensions');
         } else {
             $render = pnRender::getInstance('Tour');
             $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
@@ -51,7 +51,7 @@ class Tour_User extends AbstractController
      * @return string HTML string
      */
     public function extensions() {
-        $modules = pnModGetAllMods();
+        $modules = ModUtil::getAllMods();
         $modpages = array();
         foreach ($modules as $mod) {
             if (file_exists('modules/'.$mod['directory'].'/pndocs/tour_page1.htm')) {
@@ -94,19 +94,19 @@ class Tour_User extends AbstractController
                 $directory = 'docs/distribution';
                 break;
             case 'module':
-                $id = pnModGetIDFromName($ext);
+                $id = ModUtil::getIdFromName($ext);
                 if (!$id) {
                     LogUtil::registerError($this->__f('Unknown module %s in Tour_user_exttour.', $ext));
-                    pnRedirect(pnModURL('Tour', 'user', 'main'));
+                    System::redirect(ModUtil::url('Tour', 'user', 'main'));
                 }
-                $info = pnModGetInfo($id);
+                $info = ModUtil::getInfo($id);
                 $directory = 'modules/'.$info['directory'].'/pndocs';
                 break;
             case 'theme':
                 $id = pnThemeGetIDFromName($ext);
                 if (!$id) {
                     LogUtil::registerError($this->__f('Unknown theme %s in Tour_user_exttour.', $ext));
-                    pnRedirect(pnModURL('Tour', 'user', 'main'));
+                    System::redirect(ModUtil::url('Tour', 'user', 'main'));
                 }
                 $info = pnThemeGetInfo($id);
                 $directory = $info['directory'].'/pndocs';
@@ -128,7 +128,7 @@ class Tour_User extends AbstractController
 
         if (!$exists) {
             LogUtil::registerError(__('Tour file does not exist!', $dom));
-            return pnRedirect(pnModURL('Tour', 'user', 'extensions', $dom));
+            return System::redirect(ModUtil::url('Tour', 'user', 'extensions', $dom));
         }
 
         $render = pnRender::getInstance('Tour');

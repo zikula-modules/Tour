@@ -31,7 +31,7 @@
         $class = 'pn-menuitem-title';
     }
  
-    $links = pnModAPIFunc('Tour', 'user', 'getsublinks', array('page' => $params['page']));
+    $links = ModUtil::apiFunc('Tour', 'user', 'getsublinks', array('page' => $params['page']));
     $linkcount = count($links);
     $linktext = '';
 
