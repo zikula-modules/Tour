@@ -9,7 +9,7 @@
  * @package Zikula_Docs
  * @subpackage Tour
  */
-class Tour_Api_User extends AbstractApi
+class Tour_Api_User extends Zikula_Api
 {
     /**
      * Get the sub links for the first time tour
@@ -52,7 +52,7 @@ class Tour_Api_User extends AbstractApi
         $ext = FormUtil::getPassedValue('ext', isset($args['ext']) ? $args['ext'] : null, 'GET');
         $exttype = FormUtil::getPassedValue('exttype', isset($args['exttype']) ? $args['exttype'] : 'module', 'GET');
 
-        
+
 
         switch ($exttype) {
             case 'distro':
