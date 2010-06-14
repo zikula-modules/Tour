@@ -66,7 +66,7 @@ class Tour_User extends Zikula_Controller
             }
         }
 
-        $render = pnRender::getInstance('Tour');
+        $render = Renderer::getInstance('Tour');
         $render->assign('modpages', $modpages);
         $render->assign('themepages', $themepages);
         $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
@@ -131,7 +131,7 @@ class Tour_User extends Zikula_Controller
             return System::redirect(ModUtil::url('Tour', 'user', 'extensions', $dom));
         }
 
-        $render = pnRender::getInstance('Tour');
+        $render = Renderer::getInstance('Tour');
         return $render->fetch('tour_user_menu.htm').$render->fetch('file://'.$file);
     }
 }
