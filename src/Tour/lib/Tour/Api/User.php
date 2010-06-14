@@ -68,12 +68,12 @@ class Tour_Api_User extends Zikula_Api
                 $directory = 'modules/'.$info['directory'].'/pndocs/';
                 break;
             case 'theme':
-                $id = pnThemeGetIDFromName($ext);
+                $id = ThemeUtil::getIDFromName($ext);
                 if (!$id) {
                     LogUtil::registerError($this->__f('Unknown theme %s in Tour_userapi_getsublinks.', $ext));
                     System::redirect(ModUtil::url('Tour', 'user', 'main'));
                 }
-                $info = pnThemeGetInfo($id);
+                $info = ThemeUtil::getInfo($id);
                 $directory = $info['directory'].'/pndocs/';
                 break;
         }

@@ -32,7 +32,7 @@ class Tour_User extends Zikula_Controller
         if ($page == 'extensions') {
             $content = ModUtil::func('Tour', 'user', 'extensions');
         } else {
-            $render = pnRender::getInstance('Tour');
+            $render = Renderer::getInstance('Tour');
             $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
             $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
             if ($render->template_exists($lang.'/tour_user_display_'.$page.'.htm')) {
@@ -58,7 +58,7 @@ class Tour_User extends Zikula_Controller
                 $modpages[] = $mod['name'];
             }
         }
-        $themes = pnThemeGetAllThemes();
+        $themes = ThemeUtil::getAllThemes();
         $themepages = array();
         foreach ($themes as $theme) {
             if (file_exists('themes/'.$theme['directory'].'/pndocs/tour_page1.htm')) {
@@ -103,12 +103,12 @@ class Tour_User extends Zikula_Controller
                 $directory = 'modules/'.$info['directory'].'/pndocs';
                 break;
             case 'theme':
-                $id = pnThemeGetIDFromName($ext);
+                $id = ThemeUtil::getIDFromName($ext);
                 if (!$id) {
                     LogUtil::registerError($this->__f('Unknown theme %s in Tour_user_exttour.', $ext));
                     System::redirect(ModUtil::url('Tour', 'user', 'main'));
                 }
-                $info = pnThemeGetInfo($id);
+                $info = ThemeUtil::getInfo($id);
                 $directory = $info['directory'].'/pndocs';
                 break;
         }
