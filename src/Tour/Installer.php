@@ -10,10 +10,21 @@
  * @subpackage Tour
  */
 
- /**
-  * initialise the tour module
-  *
-  */
-function Tour_init() {
-    return true;
+class Tour_Installer extends Zikula_Installer
+{
+    /**
+     * initialise the tour module
+     *
+     */
+    public function install() {
+        return true;
+    }
+
+    public function upgrade($oldversion) {
+        return true;
+    }
+
+    public function uninstall() {
+        return true;
+    }
 }
