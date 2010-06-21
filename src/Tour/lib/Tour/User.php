@@ -32,13 +32,12 @@ class Tour_User extends Zikula_Controller
         if ($page == 'extensions') {
             $content = ModUtil::func('Tour', 'user', 'extensions');
         } else {
-            $render = Renderer::getInstance('Tour');
             $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
             $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
-            if ($render->template_exists($lang.'/tour_user_display_'.$page.'.htm')) {
-                $content = $render->fetch($lang.'/tour_user_display_'.$page.'.htm');
+            if ($this->renderer->template_exists($lang.'/tour_user_display_'.$page.'.htm')) {
+                $content = $this->renderer->fetch($lang.'/tour_user_display_'.$page.'.htm');
             } else {
-                $content = $render->fetch('en/tour_user_display_'.$page.'.htm');
+                $content = $this->renderer->fetch('en/tour_user_display_'.$page.'.htm');
             }
         }
 
@@ -66,14 +65,13 @@ class Tour_User extends Zikula_Controller
             }
         }
 
-        $render = Renderer::getInstance('Tour');
-        $render->assign('modpages', $modpages);
-        $render->assign('themepages', $themepages);
+        $this->renderer->assign('modpages', $modpages)
+                       ->assign('themepages', $themepages);
         $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
         if ($render->template_exists($lang.'/tour_user_extensions.htm')) {
-            $content = $render->fetch($lang.'/tour_user_extensions.htm');
+            $content = $this->renderer->fetch($lang.'/tour_user_extensions.htm');
         } else {
-            $content = $render->fetch('en/tour_user_extensions.htm');
+            $content = $this->renderer->fetch('en/tour_user_extensions.htm');
         }
 
         return $content;
@@ -131,7 +129,6 @@ class Tour_User extends Zikula_Controller
             return System::redirect(ModUtil::url('Tour', 'user', 'extensions', $dom));
         }
 
-        $render = Renderer::getInstance('Tour');
-        return $render->fetch('tour_user_menu.htm').$render->fetch('file://'.$file);
+        return $this->renderer->fetch('tour_user_menu.htm').$render->fetch('file://'.$file);
     }
 }
