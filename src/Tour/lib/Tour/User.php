@@ -68,7 +68,7 @@ class Tour_User extends Zikula_Controller
         $this->renderer->assign('modpages', $modpages)
                        ->assign('themepages', $themepages);
         $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
-        if ($render->template_exists($lang.'/tour_user_extensions.htm')) {
+        if ($this->renderer->template_exists($lang.'/tour_user_extensions.htm')) {
             $content = $this->renderer->fetch($lang.'/tour_user_extensions.htm');
         } else {
             $content = $this->renderer->fetch('en/tour_user_extensions.htm');
@@ -129,6 +129,6 @@ class Tour_User extends Zikula_Controller
             return System::redirect(ModUtil::url('Tour', 'user', 'extensions', $dom));
         }
 
-        return $this->renderer->fetch('tour_user_menu.htm').$render->fetch('file://'.$file);
+        return $this->renderer->fetch('tour_user_menu.htm').$this->renderer->fetch('file://'.$file);
     }
 }
