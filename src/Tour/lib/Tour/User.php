@@ -34,10 +34,10 @@ class Tour_User extends Zikula_Controller
         } else {
             $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
             $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
-            if ($this->renderer->template_exists($lang.'/tour_user_display_'.$page.'.htm')) {
-                $content = $this->renderer->fetch($lang.'/tour_user_display_'.$page.'.htm');
+            if ($this->view->template_exists($lang.'/tour_user_display_'.$page.'.htm')) {
+                $content = $this->view->fetch($lang.'/tour_user_display_'.$page.'.htm');
             } else {
-                $content = $this->renderer->fetch('en/tour_user_display_'.$page.'.htm');
+                $content = $this->view->fetch('en/tour_user_display_'.$page.'.htm');
             }
         }
 
@@ -65,13 +65,13 @@ class Tour_User extends Zikula_Controller
             }
         }
 
-        $this->renderer->assign('modpages', $modpages)
+        $this->view->assign('modpages', $modpages)
                        ->assign('themepages', $themepages);
         $lang = ZLanguage::transformFS(ZLanguage::getLanguageCode());
-        if ($this->renderer->template_exists($lang.'/tour_user_extensions.htm')) {
-            $content = $this->renderer->fetch($lang.'/tour_user_extensions.htm');
+        if ($this->view->template_exists($lang.'/tour_user_extensions.htm')) {
+            $content = $this->view->fetch($lang.'/tour_user_extensions.htm');
         } else {
-            $content = $this->renderer->fetch('en/tour_user_extensions.htm');
+            $content = $this->view->fetch('en/tour_user_extensions.htm');
         }
 
         return $content;
@@ -129,6 +129,6 @@ class Tour_User extends Zikula_Controller
             return System::redirect(ModUtil::url('Tour', 'user', 'extensions', $dom));
         }
 
-        return $this->renderer->fetch('tour_user_menu.htm').$this->renderer->fetch('file://'.$file);
+        return $this->view->fetch('tour_user_menu.htm').$this->view->fetch('file://'.$file);
     }
 }
