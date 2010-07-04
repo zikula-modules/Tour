@@ -10,7 +10,7 @@
  * @subpackage Tour
  */
 
-class Tour_User extends Zikula_Controller
+class Tour_Controller_User extends Zikula_Controller
 {
     /**
      * Main user function, simply returnt he tour index page.
