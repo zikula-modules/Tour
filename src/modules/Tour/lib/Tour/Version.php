@@ -7,7 +7,7 @@
  * @author Simon Birtwistle simon@itbegins.co.uk
  */
 
-class Tour_Version extends Zikula_Version
+class Tour_Version extends Zikula_AbstractVersion
 {
     public function getMetaData()
     {
