@@ -10,7 +10,7 @@
  * @subpackage Tour
  */
 
-class Tour_Installer extends Zikula_Installer
+class Tour_Installer extends Zikula_AbstractInstaller
 {
     /**
      * initialise the tour module
